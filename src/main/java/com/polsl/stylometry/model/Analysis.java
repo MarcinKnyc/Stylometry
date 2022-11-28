@@ -14,6 +14,7 @@ import java.util.ArrayList;
 public class Analysis {
     String text;
     ArrayList<String> results = new ArrayList<String>();
+    
     public Analysis(AnalysisBuilder builder) throws InvalidTextInputException {
         text = builder.getText();
 
