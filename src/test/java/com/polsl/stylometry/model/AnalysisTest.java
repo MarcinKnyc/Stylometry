@@ -20,7 +20,7 @@ public class AnalysisTest {
 
     @BeforeEach
     public void setUp() {
-        builder = new AnalysisBuilder("Not a real sentence.");
+        builder = new AnalysisBuilder("Not not a a real real sentence.");
     }
     
     @Test
@@ -28,7 +28,7 @@ public class AnalysisTest {
         builder.AnalyzeWordFrequency();
         try {
             Analysis analysis = builder.Build();
-            assertThat(analysis.GetResults(), hasItem("wordFrequency normal"));
+            assertThat(analysis.GetResults(), hasItem("Most common words: real, not, a"));
         } catch (InvalidTextInputException e) {
             fail("An exception occured.");
         }

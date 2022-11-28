@@ -5,6 +5,12 @@
 package com.polsl.stylometry.model;
 
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.PriorityQueue;
+import java.util.concurrent.ConcurrentMap;
+import java.util.stream.Collectors;
+
+import static java.util.Arrays.asList;
 
 /**
  *
@@ -24,18 +30,59 @@ public class Analysis {
         }
 
         if (builder.wordFrequency){
-            results.add("wordFrequency normal");
+            analyzeFrequency();
         }
         if (builder.vocabularyDiversity){
-            results.add("vocabularyDiversity normal");
+            analyzeVocabularyDiversity();
         }
         if (builder.sentenceLength){
-            results.add("sentenceLength normal");
+            analyzeSentenceLength();
         }
         if (builder.paragraphLength){
-            results.add("paragraphLength normal");
+            analyzeParagraphLength();
         }
     }
+
+    public void analyzeParagraphLength() {
+        results.add("paragraphLength normal");
+    }
+
+    public void analyzeSentenceLength() {
+        results.add("sentenceLength normal");
+    }
+
+    public void analyzeVocabularyDiversity() {
+        results.add("vocabularyDiversity normal");
+    }
+
+    public void analyzeFrequency() {
+        PriorityQueue<String> pq = getListOfMostCommonWords(3);
+        String word1 = pq.poll();
+        String word2 = pq.poll();
+        String word3 = pq.poll();
+        results.add("Most common words: " + word1 + ", " + word2 + ", " + word3);
+    }
+
+    private PriorityQueue<String> getListOfMostCommonWords(int size) {
+        //source: https://www.javacodemonk.com/count-word-frequency-in-java-e6c2918a
+        ConcurrentMap<String, Integer> freqMap =
+                asList(text.split("[\\s.]"))
+                        .parallelStream()
+                        .filter(s -> !s.isEmpty())
+                        .collect(Collectors.toConcurrentMap(w -> w.toLowerCase(), w -> 1, Integer::sum));
+        //System.out.println(freqMap.toString());
+
+        //Priority queue that uses frequency as the comparator and size as 3
+        PriorityQueue<String> pq = new PriorityQueue<>(Comparator.comparingInt(freqMap::get));
+        for(String key: freqMap.keySet()) {
+            pq.add(key);
+            if(pq.size() > size) {
+                pq.poll();
+            }
+        }
+        return pq;
+    }
+
     public ArrayList<String> GetResults(){
         return results;
     }
