@@ -6,31 +6,53 @@
 package com.polsl.stylometry.controller;
 import com.polsl.stylometry.model.AnalysisBuilder;
 import com.polsl.stylometry.model.Analysis;
-
+import com.polsl.stylometry.model.InvalidTextInputException;
+import com.polsl.stylometry.view.AnalysisView;
+import com.polsl.stylometry.view.ErrorView;
+import com.polsl.stylometry.view.HelpView;
 
 /**
  *
- * @author Student ETO-A 18
+ * @version 0.1
+ * @author Marcin Knyć
+ * The view and model classes are instantiated in the code and not as fields, because the controller is stateless for now.
+ * A stateless controller will be easier to update and maintain.
  */
 public class Stylometry {
+    public void PerformStylometricAnalysis(
+            String text,
+            boolean shouldAnalyzeWordFrequency,
+            boolean shouldAnalyzeVocabularyDiversity,
+            boolean shouldAnalyzeSentenceLength,
+            boolean shouldAnalyzeParagraphLength
+    ) {
+        AnalysisBuilder builder = new AnalysisBuilder(text);
 
-    public static void main(String[] args) {
-        CommandLineArgumentsParser parser = new CommandLineArgumentsParser(args);
-        ParsedCommandLineArguments arguments = parser.Parse();
-        
-        AnalysisBuilder builder = new AnalysisBuilder("This is an example sentence. In an example paragraph. Funny word: Sesquipedalian.");
-        if (arguments.wordFrequency)
+        if (shouldAnalyzeWordFrequency)
             builder.AnalyzeWordFrequency();
-        if (arguments.vocabularyDiversity)
+        if (shouldAnalyzeVocabularyDiversity)
             builder.AnalyzeVocabularyDiversity();
-        if (arguments.sentenceLength)
+        if (shouldAnalyzeSentenceLength)
             builder.AnalyzeSentenceLength();
-        if (arguments.paragraphLength)
+        if (shouldAnalyzeParagraphLength)
             builder.AnalyzeParagraphLength();
-        
-        Analysis analysis = builder.Build();
-        for (String result : analysis.GetResults()){
-            System.out.println(result);
+
+
+        try {
+            //create model
+            Analysis analysis = builder.Build();
+            //display results
+            AnalysisView analysisView = new AnalysisView();
+            analysisView.ViewAnalysis(analysis);
+        } catch (InvalidTextInputException exception){
+            //display error
+            ErrorView errorView = new ErrorView();
+            errorView.DisplayError(exception.getMessage());
         }
+    }
+
+    public void DisplayHelp(){
+        HelpView helpView = new HelpView();
+        helpView.DisplayHelp();
     }
 }

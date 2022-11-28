@@ -6,7 +6,8 @@ package com.polsl.stylometry.model;
 
 /**
  *
- * @author Student ETO-A 18
+ * @author Marcin Knyć
+ * @version 0.1
  */
 public class AnalysisBuilder {
     boolean wordFrequency = false, vocabularyDiversity = false, 
@@ -32,7 +33,7 @@ public class AnalysisBuilder {
         paragraphLength = true;
         return this;
     }
-    public Analysis Build(){
+    public Analysis Build() throws InvalidTextInputException {
         return new Analysis(this);
     }
     

@@ -2,11 +2,20 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.polsl.stylometry.controller;
+package com.polsl.stylometry.main;
 
 /**
  *
- * @author Student ETO-A 18
+ * @version 0.1
+ * @author Marcin Knyć
+ * Available command line arguments:
+ * --checkWordFrequency
+ * --checkVocabularyDiversity
+ * --checkSentenceLength
+ * --checkParagraphLength
+ * --text "This is an example sentence. In an example paragraph. Funny word: Sesquipedalian."
+ * Defaults: checks nothing.
+ * Throws exception if no text is provided.
  */
 public class CommandLineArgumentsParser {
     String[] Args;
@@ -18,7 +27,7 @@ public class CommandLineArgumentsParser {
         boolean vocabularyDiversity = false;
         boolean sentenceLength = false;
         boolean paragraphLength = false;
-        boolean isHelp = false;
+//        boolean isHelp = false;
         String text = "";
         if (Args == null){
             throw new IllegalArgumentException("Please specify --text argument (use \"\")");
@@ -32,8 +41,9 @@ public class CommandLineArgumentsParser {
                 sentenceLength=true;
             if ("--checkParagraphLength".equals(Args[i]))
                 paragraphLength=true;
-            if ("--help".equals(Args[i]))
-                isHelp = true;
+            //there is no help for you yet :(
+//            if ("--help".equals(Args[i]))
+//                isHelp = true;
             if ("--text".equals(Args[i])){
                 i++;
                 text = Args[i];

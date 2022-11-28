@@ -8,8 +8,13 @@ import com.polsl.stylometry.model.Analysis;
 
 /**
  *
- * @author Student ETO-A 18
+ * @author Marcin Knyć
+ * @version 0.1
  */
 public class AnalysisView {
-    
+    public void ViewAnalysis(Analysis analysis){
+        for (String result : analysis.GetResults()){
+            System.out.println(result);
+        }
+    }
 }

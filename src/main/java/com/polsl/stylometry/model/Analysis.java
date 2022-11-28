@@ -8,13 +8,20 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Student ETO-A 18
+ * @author Marcin Knyć
+ * @version 0.1
  */
 public class Analysis {
     String text;
     ArrayList<String> results = new ArrayList<String>();
-    public Analysis(AnalysisBuilder builder){
+    public Analysis(AnalysisBuilder builder) throws InvalidTextInputException {
         text = builder.getText();
+
+        String regexCheckIfContainsLetters = ".*[a-zA-Z].*";
+        if (! text.matches(regexCheckIfContainsLetters)){
+            throw new InvalidTextInputException("The input text can't be only digits, whitespace and special chars, it needs to include letters.");
+        }
+
         if (builder.wordFrequency){
             results.add("wordFrequency normal");
         }
