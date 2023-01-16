@@ -15,7 +15,7 @@ import static java.util.Arrays.asList;
 /**
  *
  * @author Marcin Knyć
- * @version 0.1
+ * @version 0.2
  */
 public class Analysis {
     String text;
@@ -24,8 +24,7 @@ public class Analysis {
     public Analysis(AnalysisBuilder builder) throws InvalidTextInputException {
         text = builder.getText();
 
-        String regexCheckIfContainsLetters = ".*[a-zA-Z].*";
-        if (! text.matches(regexCheckIfContainsLetters)){
+        if (!containsLetters(text)){
             throw new InvalidTextInputException("The input text can't be only digits, whitespace and special chars, it needs to include letters.");
         }
 
@@ -44,11 +43,17 @@ public class Analysis {
     }
 
     public void analyzeParagraphLength() {
-        results.add("paragraphLength normal");
+        String[] lines = text.split("\\r?\\n|\\r");
+        int numberOfLines = lines.length;
+        float averageParagraphLength = (float)text.length() / (float)numberOfLines;
+        results.add("Average paragrath length: " + averageParagraphLength + " characters.");
     }
 
     public void analyzeSentenceLength() {
-        results.add("sentenceLength normal");
+        String[] sentences = text.split( "\\." );
+        int numberOfSentences = sentences.length;
+        float averageSentenceLength = (float)text.length() / (float)numberOfSentences;
+        results.add("Average sentence length: " + averageSentenceLength + " characters.");
     }
 
     public void analyzeVocabularyDiversity() {
@@ -85,5 +90,17 @@ public class Analysis {
 
     public ArrayList<String> GetResults(){
         return results;
+    }
+    private static boolean containsLetters(String string) {
+        //source: https://dirask.com/posts/Java-check-if-string-contains-any-letters-pVmeRD
+        if (string == null || string.isEmpty()) {
+            return false;
+        }
+        for (int i = 0; i < string.length(); ++i) {            
+            if (Character.isLetter(string.charAt(i))) {
+                return true;
+            }
+        }
+        return false;
     }
 }
