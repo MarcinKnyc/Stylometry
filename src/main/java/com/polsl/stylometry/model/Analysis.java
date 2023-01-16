@@ -57,7 +57,24 @@ public class Analysis {
     }
 
     public void analyzeVocabularyDiversity() {
-        results.add("vocabularyDiversity normal");
+        String result = getVocabularyDiversityGrade();
+        results.add("Vocabulary diversity was graded as " + result);
+    }
+
+    private String getVocabularyDiversityGrade(){
+        ConcurrentMap<String, Integer> freqMap = getWordFrequencyMap();
+        int wordCountSum = 0;
+        for (ConcurrentMap.Entry<String, Integer> entry : freqMap.entrySet())
+        {
+            wordCountSum += entry.getValue();
+        }
+        float wordCountAverage = (float)wordCountSum / (float)freqMap.size();
+
+        if (wordCountAverage > 3) return "Miserable";
+        if (wordCountAverage > 2.5) return "Very bad";
+        if (wordCountAverage > 2) return "Average";
+        if (wordCountAverage > 1.75) return "Good";
+        return "Amazing";
     }
 
     public void analyzeFrequency() {
@@ -69,13 +86,7 @@ public class Analysis {
     }
 
     private PriorityQueue<String> getListOfMostCommonWords(int size) {
-        //source: https://www.javacodemonk.com/count-word-frequency-in-java-e6c2918a
-        ConcurrentMap<String, Integer> freqMap =
-                asList(text.split("[\\s.]"))
-                        .parallelStream()
-                        .filter(s -> !s.isEmpty())
-                        .collect(Collectors.toConcurrentMap(w -> w.toLowerCase(), w -> 1, Integer::sum));
-        //System.out.println(freqMap.toString());
+        ConcurrentMap<String, Integer> freqMap = getWordFrequencyMap();
 
         //Priority queue that uses frequency as the comparator and size as 3
         PriorityQueue<String> pq = new PriorityQueue<>(Comparator.comparingInt(freqMap::get));
@@ -86,6 +97,17 @@ public class Analysis {
             }
         }
         return pq;
+    }
+
+    private ConcurrentMap<String, Integer> getWordFrequencyMap() {
+        //source: https://www.javacodemonk.com/count-word-frequency-in-java-e6c2918a
+        ConcurrentMap<String, Integer> freqMap =
+                asList(text.split("[\\s.]"))
+                        .parallelStream()
+                        .filter(s -> !s.isEmpty())
+                        .collect(Collectors.toConcurrentMap(w -> w.toLowerCase(), w -> 1, Integer::sum));
+        //System.out.println(freqMap.toString());
+        return freqMap;
     }
 
     public ArrayList<String> GetResults(){

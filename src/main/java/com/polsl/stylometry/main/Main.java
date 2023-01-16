@@ -11,20 +11,20 @@ import com.polsl.stylometry.controller.Stylometry;
  */
 public class Main {
     public static void main(String[] args) {
-        CommandLineArgumentsParser parser = new CommandLineArgumentsParser(args);
-        try {
-            ParsedCommandLineArguments arguments = parser.Parse();
-            Stylometry stylometry = new Stylometry();
-            stylometry.PerformStylometricAnalysis(
-                    arguments.text,
-                    arguments.wordFrequency,
-                    arguments.vocabularyDiversity,
-                    arguments.sentenceLength,
-                    arguments.paragraphLength
-            );
-        } catch (IllegalArgumentException exception){
-            Stylometry stylometry = new Stylometry();
-            stylometry.DisplayHelp();
-        }
+//        CommandLineArgumentsParser parser = new CommandLineArgumentsParser(args);
+//        try {
+//            ParsedCommandLineArguments arguments = parser.Parse();
+//            Stylometry stylometry = new Stylometry();
+//            stylometry.PerformStylometricAnalysis(
+//                    arguments.text,
+//                    arguments.wordFrequency,
+//                    arguments.vocabularyDiversity,
+//                    arguments.sentenceLength,
+//                    arguments.paragraphLength
+//            );
+//        } catch (IllegalArgumentException exception){
+//            Stylometry stylometry = new Stylometry();
+//            stylometry.DisplayHelp();
+//        }
     }
 }

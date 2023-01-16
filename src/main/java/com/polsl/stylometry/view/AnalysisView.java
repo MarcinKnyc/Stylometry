@@ -12,9 +12,9 @@ import com.polsl.stylometry.model.Analysis;
  * @version 0.1
  */
 public class AnalysisView {
-    public void ViewAnalysis(Analysis analysis){
-        for (String result : analysis.GetResults()){
-            System.out.println(result);
-        }
-    }
+//    public void ViewAnalysis(Analysis analysis){
+//        for (String result : analysis.GetResults()){
+//            System.out.println(result);
+//        }
+//    }
 }
