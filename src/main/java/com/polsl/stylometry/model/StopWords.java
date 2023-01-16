@@ -7,6 +7,8 @@ package com.polsl.stylometry.model;
 /**
  *
  * @author Student ETO-A 18
+ * @version 0.1
+ * This is a stub. This class will make it easier to skip words like "this, a, an..." in the analysis as they provide no value.
  */
 public class StopWords {
     

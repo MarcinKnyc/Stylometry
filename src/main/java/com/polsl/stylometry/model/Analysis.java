@@ -15,7 +15,7 @@ import static java.util.Arrays.asList;
 /**
  *
  * @author Marcin Knyć
- * @version 0.2
+ * @version 0.3
  */
 public class Analysis {
     String text;
@@ -24,6 +24,7 @@ public class Analysis {
     public Analysis(AnalysisBuilder builder) throws InvalidTextInputException {
         text = builder.getText();
 
+        //custom exception
         if (!containsLetters(text)){
             throw new InvalidTextInputException("The input text can't be only digits, whitespace and special chars, it needs to include letters.");
         }

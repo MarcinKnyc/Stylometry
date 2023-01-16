@@ -15,7 +15,7 @@ import javax.swing.JOptionPane;
  */
 public class MainForm extends javax.swing.JFrame {
     
-    private String copiedFromStylometryAnalysisView(Analysis analysis){
+    private String formatAnalysisResults(Analysis analysis){
         String output = "";
         
         for (String result : analysis.GetResults()){
@@ -25,7 +25,11 @@ public class MainForm extends javax.swing.JFrame {
         return output;
     }
 
-    private void copiedFromStylometryController(
+    /**
+     * Upon completing the form, this function is run and analyzes everything about the text.
+     * It returns its findings in a Message box window.
+     * */
+    private void analyzeText(
         String text,
         boolean shouldAnalyzeWordFrequency,
         boolean shouldAnalyzeVocabularyDiversity,
@@ -48,7 +52,7 @@ public class MainForm extends javax.swing.JFrame {
             //create model
             Analysis analysis = builder.Build();
             //display results
-            String analysisString = copiedFromStylometryAnalysisView(analysis);
+            String analysisString = formatAnalysisResults(analysis);
             JOptionPane.showMessageDialog(this, analysisString);
         } catch (InvalidTextInputException exception){
             //display error
@@ -62,10 +66,6 @@ public class MainForm extends javax.swing.JFrame {
     public MainForm() {
         initComponents();
     }
-
-//    public setDefaultTextForTextArea(String text){
-//        jTextArea1.
-//    }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -161,7 +161,7 @@ public class MainForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        copiedFromStylometryController(jTextArea1.getText(),
+        analyzeText(jTextArea1.getText(),
                 checkWordFrequency.isSelected(), 
                 checkVocabularyDiversity.isSelected(), 
                 checkSentenceLength.isSelected(), 
@@ -176,7 +176,8 @@ public class MainForm extends javax.swing.JFrame {
     }//GEN-LAST:event_checkParagraphLengthActionPerformed
 
     /**
-     * @param args the command line arguments
+     * @param args the command line arguments are usually empty.
+     * This function opens the MainForm window.
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

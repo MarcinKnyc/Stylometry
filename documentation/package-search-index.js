@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"com.polsl.stylometry.controller"},{"l":"com.polsl.stylometry.main"},{"l":"com.polsl.stylometry.model"},{"l":"com.polsl.stylometry.view"}];updateSearchResults();
