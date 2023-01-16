@@ -1,4 +1,2 @@
-com.polsl.stylometry.controller
-com.polsl.stylometry.main
 com.polsl.stylometry.model
-com.polsl.stylometry.view
+com.polsl.stylometry.swingGUI

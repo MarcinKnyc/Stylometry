@@ -16,6 +16,7 @@ import static java.util.Arrays.asList;
  *
  * @author Marcin Knyć
  * @version 0.3
+ * All analysis results are stored in a field and returned with GetResults() in the end.
  */
 public class Analysis {
     String text;
@@ -47,7 +48,7 @@ public class Analysis {
         String[] lines = text.split("\\r?\\n|\\r");
         int numberOfLines = lines.length;
         float averageParagraphLength = (float)text.length() / (float)numberOfLines;
-        results.add("Average paragrath length: " + averageParagraphLength + " characters.");
+        results.add("Average paragraph length: " + averageParagraphLength + " characters.");
     }
 
     public void analyzeSentenceLength() {

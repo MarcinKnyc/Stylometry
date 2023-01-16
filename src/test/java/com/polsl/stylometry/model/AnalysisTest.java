@@ -38,7 +38,7 @@ public class AnalysisTest {
         builder.AnalyzeVocabularyDiversity();
         try {
             Analysis analysis = builder.Build();
-            assertThat(analysis.GetResults(), hasItem("vocabularyDiversity normal"));
+            assertThat(analysis.GetResults(), hasItem("Vocabulary diversity was graded as Amazing"));
         } catch (InvalidTextInputException e) {
             fail("An exception occured.");
         }    
@@ -48,7 +48,7 @@ public class AnalysisTest {
         builder.AnalyzeSentenceLength();
         try {
             Analysis analysis = builder.Build();
-            assertThat(analysis.GetResults(), hasItem("sentenceLength normal"));
+            assertThat(analysis.GetResults(), hasItem("Average sentence length: 31.0 characters."));
         } catch (InvalidTextInputException e) {
             fail("An exception occured.");
         }    
@@ -58,7 +58,7 @@ public class AnalysisTest {
         builder.AnalyzeParagraphLength();
         try {
             Analysis analysis = builder.Build();
-            assertThat(analysis.GetResults(), hasItem("paragraphLength normal"));
+            assertThat(analysis.GetResults(), hasItem("Average paragraph length: 31.0 characters."));
         } catch (InvalidTextInputException e) {
             fail("An exception occured.");
         }    
