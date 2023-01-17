@@ -15,7 +15,7 @@ import static java.util.Arrays.asList;
 /**
  *
  * @author Marcin Knyć
- * @version 0.3
+ * @version 0.4
  * All analysis results are stored in a field and returned with GetResults() in the end.
  */
 public class Analysis {
@@ -27,7 +27,7 @@ public class Analysis {
 
         //custom exception
         if (!containsLetters(text)){
-            throw new InvalidTextInputException("The input text can't be only digits, whitespace and special chars, it needs to include letters.");
+            throw new InvalidTextInputException("The input text can't be empty, only digits, whitespace and special chars, it needs to include letters.");
         }
 
         if (builder.wordFrequency){
