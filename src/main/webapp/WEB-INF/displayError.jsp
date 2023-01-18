@@ -13,19 +13,12 @@
         <p><b>Stylometry</b> - A Simple Web App for Stylometric text analysis</p>
     </div>
     <div id="content">
-        <h3>text:</h3>
+        <h2>An error occurred:</h2>
         <p>
             <%
-            out.println(request.getAttribute("text"));
+                out.println(request.getAttribute("message"));
             %>
         </p>
-        <h3>analysis results:</h3>
-        <ul>
-            <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-            <c:forEach items="${results}" var="result" varStatus="loop">
-                <li>${result}</li>
-            </c:forEach>
-        </ul>
     </div>
     <div id="footer">
         <p>(C) 2023 Marcin Knyc, MIT Licence</p>

@@ -23,26 +23,32 @@ public class AnalysisServlet extends HttpServlet {
         response.sendRedirect("/WEB-INF/analysisForm.jsp");
     }
 
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String text = request.getParameter("text");
-        analyzeText(
-                text,
-                request.getParameter("shouldAnalyzeWordFrequency") != null,
-                request.getParameter("shouldAnalyzeVocabularyDiversity") != null,
-                request.getParameter("shouldAnalyzeSentenceLength") != null,
-                request.getParameter("shouldAnalyzeParagraphLength") != null
-        );
+        try {
+            analyzeText(
+                    text,
+                    request.getParameter("shouldAnalyzeWordFrequency") != null,
+                    request.getParameter("shouldAnalyzeVocabularyDiversity") != null,
+                    request.getParameter("shouldAnalyzeSentenceLength") != null,
+                    request.getParameter("shouldAnalyzeParagraphLength") != null
+            );
+        } catch (InvalidTextInputException e) {
+            request.setAttribute("message", e.getMessage());
+            request.getRequestDispatcher("/WEB-INF/displayError.jsp").forward(request,response);
+            response.sendRedirect("/WEB-INF/displayError.jsp");
+        }
 
         response.sendRedirect("/StylometryServlets-1.0-SNAPSHOT/analysis-results");
     }
 
-    private String analyzeText(
+    private void analyzeText(
             String text,
             boolean shouldAnalyzeWordFrequency,
             boolean shouldAnalyzeVocabularyDiversity,
             boolean shouldAnalyzeSentenceLength,
             boolean shouldAnalyzeParagraphLength
-    ){
+    ) throws InvalidTextInputException {
         AnalysisBuilder builder = new AnalysisBuilder(text);
 
         if (shouldAnalyzeWordFrequency)
@@ -54,18 +60,9 @@ public class AnalysisServlet extends HttpServlet {
         if (shouldAnalyzeParagraphLength)
             builder.AnalyzeParagraphLength();
 
-        try {
-            //create model
-            Analysis analysis = builder.Build();
-            Analysis.setInstance(analysis);
-
-            return "";
-            //display results
-            //return displayAnalysis.formatAnalysisResults(analysis);
-        } catch (InvalidTextInputException exception){
-            //display error
-            return "<h1>An error occured: " + exception.getMessage() + "</h1>";
-        }
+        //create model
+        Analysis analysis = builder.Build();
+        Analysis.setInstance(analysis);
     }
 
     public void destroy() {

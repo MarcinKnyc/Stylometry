@@ -27,7 +27,7 @@
         </form>
     </div>
     <div id="footer">
-        <p>(C) 2023 Marcin Knyć, MIT Licence</p>
+        <p>(C) 2023 Marcin Knyc, MIT Licence</p>
     </div>
 </div>
 </body>
