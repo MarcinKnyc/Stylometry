@@ -7,3 +7,7 @@
 ## Screenshots, video
 Due to how much time deploying this project might take, I supply a video presentation on how the website works:
 - https://drive.google.com/file/d/1msXbs0Z110lwiyXJOXuT8XkJiaqNSzba/view?usp=sharing
+
+## Github repository
+You are welcome to contribute to this repository at:
+- https://github.com/MarcinKnyc/Stylometry
