@@ -18,7 +18,7 @@ public class MainForm extends javax.swing.JFrame {
     private String formatAnalysisResults(Analysis analysis){
         String output = "";
         
-        for (String result : analysis.GetResults()){
+        for (String result : analysis.getResults()){
             output = output + "\r\n" + result;
         }
         

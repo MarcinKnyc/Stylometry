@@ -128,7 +128,7 @@ public class Analysis {
         return freqMap;
     }
 
-    public ArrayList<String> GetResults(){
+    public ArrayList<String> getResults(){
         return results;
     }
     private static boolean containsLetters(String string) {
