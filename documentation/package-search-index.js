@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"com.polsl.stylometry.model"},{"l":"com.polsl.stylometry.swingGUI"}];updateSearchResults();
