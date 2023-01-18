@@ -10,11 +10,11 @@ import com.polsl.stylometry.view.Layout;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
-@WebServlet(name = "AnalysisServlet", value = "/analyze")
+@WebServlet(name = "AnalysisServlet", value = "/analyze-text")
 public class AnalysisServlet extends HttpServlet {
     //source: https://turngeek.github.io/javaeeinaday/chapter/3-the-rise-of-server-side-java-java-servlets/
     private final String form = "<div id=\"content\">"
-                    + "<h1>Add Memo:</h1>" + "<form  method=\"POST\" action=\"\">"
+                    + "<h1>Analyze text:</h1>" + "<form  method=\"POST\" action=\"\">"
                     + "<input type=\"checkbox\" name=\"shouldAnalyzeWordFrequency\" />"
                     + "<label for=\"shouldAnalyzeWordFrequency\">Check word frequency?</label><br>"
                     + "<input type=\"checkbox\" name=\"shouldAnalyzeVocabularyDiversity\" />"
@@ -38,26 +38,23 @@ public class AnalysisServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("text/html");
 
-        // Hello
         PrintWriter out = response.getWriter();
         out.println(layout.header+form+layout.footer);
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String text = request.getParameter("text");
-        String httpResponse = layout.header;
-        httpResponse += analyzeText(
+//        String httpResponse = layout.header;
+        analyzeText(
                 text,
                 request.getParameter("shouldAnalyzeWordFrequency") != null,
                 request.getParameter("shouldAnalyzeVocabularyDiversity") != null,
                 request.getParameter("shouldAnalyzeSentenceLength") != null,
                 request.getParameter("shouldAnalyzeParagraphLength") != null
         );
-        httpResponse += layout.footer;
+//        httpResponse += layout.footer;
 
-        // Hello
-        PrintWriter out = response.getWriter();
-        out.println(httpResponse);
+        response.sendRedirect("/StylometryServlets-1.0-SNAPSHOT/analysis-results");
     }
 
     private String analyzeText(
@@ -81,6 +78,8 @@ public class AnalysisServlet extends HttpServlet {
         try {
             //create model
             Analysis analysis = builder.Build();
+            Analysis.setInstance(analysis);
+
             //display results
             return displayAnalysis.formatAnalysisResults(analysis);
         } catch (InvalidTextInputException exception){

@@ -15,11 +15,27 @@ import static java.util.Arrays.asList;
 /**
  *
  * @author Marcin Knyć
- * @version 0.4
+ * @version 0.5
  * All analysis results are stored in a field and returned with GetResults() in the end.
+ * is now a singleton for uses of f4
  */
 public class Analysis {
+    //custom singleton logic:
+    private static Analysis instance = null;
+
+    public static Analysis getInstance(){
+        return instance;
+    }
+
+    public static void setInstance(Analysis analysis) throws InvalidTextInputException {
+        instance = analysis;
+    }
+
+    //actual analysis:
     String text;
+    public String getText() {
+        return text;
+    }
     ArrayList<String> results = new ArrayList<String>();
     
     public Analysis(AnalysisBuilder builder) throws InvalidTextInputException {
