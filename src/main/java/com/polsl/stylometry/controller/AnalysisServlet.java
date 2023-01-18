@@ -9,6 +9,13 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
+/**
+ *
+ * @author Marcin Knyć
+ * @version 0.1
+ * Form to submit text for analysis
+ * Different functions for POST and GET since making them the same didn't make sense to me.
+ */
 @WebServlet(name = "AnalysisServlet", value = "/analyze-text")
 public class AnalysisServlet extends HttpServlet {
     //source: https://turngeek.github.io/javaeeinaday/chapter/3-the-rise-of-server-side-java-java-servlets/

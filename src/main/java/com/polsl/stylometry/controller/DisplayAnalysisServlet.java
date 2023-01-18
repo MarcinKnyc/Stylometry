@@ -11,6 +11,13 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ *
+ * @author Marcin Knyć
+ * @version 0.1
+ * Site to display analysis results.
+ * Different functions for POST and GET since making them the same didn't make sense to me.
+ */
 @WebServlet(name = "displayAnalysisServlet", value = "/analysis-results")
 public class DisplayAnalysisServlet extends HttpServlet {
     /**
