@@ -2,7 +2,7 @@ package com.polsl.stylometry.controller;
 
 import java.io.*;
 
-import com.polsl.stylometry.model.Analysis;
+import com.polsl.stylometry.entities.*;
 import com.polsl.stylometry.model.AnalysisBuilder;
 import com.polsl.stylometry.model.InvalidTextInputException;
 import jakarta.servlet.ServletException;
@@ -31,10 +31,9 @@ public class AnalysisServlet extends HttpServlet {
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        String text = request.getParameter("text");
         try {
             analyzeText(
-                    text,
+                    request.getParameter("text"),
                     request.getParameter("shouldAnalyzeWordFrequency") != null,
                     request.getParameter("shouldAnalyzeVocabularyDiversity") != null,
                     request.getParameter("shouldAnalyzeSentenceLength") != null,
@@ -50,13 +49,13 @@ public class AnalysisServlet extends HttpServlet {
     }
 
     private void analyzeText(
-            String text,
+            String _text,
             boolean shouldAnalyzeWordFrequency,
             boolean shouldAnalyzeVocabularyDiversity,
             boolean shouldAnalyzeSentenceLength,
             boolean shouldAnalyzeParagraphLength
     ) throws InvalidTextInputException {
-        AnalysisBuilder builder = new AnalysisBuilder(text);
+        AnalysisBuilder builder = new AnalysisBuilder(_text);
 
         if (shouldAnalyzeWordFrequency)
             builder.AnalyzeWordFrequency();
@@ -68,8 +67,11 @@ public class AnalysisServlet extends HttpServlet {
             builder.AnalyzeParagraphLength();
 
         //create model
-        Analysis analysis = builder.Build();
-        Analysis.setInstance(analysis);
+//        Analysis analysis = builder.Build();
+//        Analysis.setInstance(analysis);
+        Text text = new Text();
+        text.setContent(_text);
+//        text.analyze(builder);
     }
 
     public void destroy() {

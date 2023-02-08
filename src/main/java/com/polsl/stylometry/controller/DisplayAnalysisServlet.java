@@ -52,8 +52,10 @@ public class DisplayAnalysisServlet extends HttpServlet {
         response.setContentType("text/html");
 
         Analysis analysis = Analysis.getInstance();
-        request.setAttribute("text", analysis.getText());
-        request.setAttribute("results", analysis.getResults());
+        //request.setAttribute("text", analysis.getText());
+        request.setAttribute("text", "UNKNOWN");
+//        request.setAttribute("results", analysis.getResults());
+        request.setAttribute("results", new ArrayList<String>());
         request.getRequestDispatcher("/WEB-INF/displayAnalysis.jsp").forward(request,response);
         response.sendRedirect("/WEB-INF/displayAnalysis.jsp");
 //        PrintWriter out = response.getWriter();
