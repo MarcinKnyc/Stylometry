@@ -4,7 +4,9 @@ import java.io.*;
 
 import com.polsl.stylometry.entities.*;
 import com.polsl.stylometry.model.AnalysisBuilder;
+import com.polsl.stylometry.model.EntityManagerSingleton;
 import com.polsl.stylometry.model.InvalidTextInputException;
+import jakarta.persistence.EntityManager;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
@@ -71,6 +73,13 @@ public class AnalysisServlet extends HttpServlet {
 //        Analysis.setInstance(analysis);
         Text text = new Text();
         text.setContent(_text);
+
+        EntityManagerSingleton factory = EntityManagerSingleton.getInstance();
+        EntityManager entityManager = factory.getEntityManager();
+        entityManager.getTransaction().begin();
+        entityManager.persist(text);
+        entityManager.getTransaction().commit();
+//        factory.reset();
 //        text.analyze(builder);
     }
 

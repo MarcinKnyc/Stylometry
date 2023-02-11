@@ -21,15 +21,23 @@ public class EntityManagerSingleton {
         instance = analysis;
     }
 
+    private final EntityManagerFactory entityManagerFactory;
 
     public EntityManager getEntityManager() {
         return entityManager;
     }
 
-    private final EntityManager entityManager;
+    public void reset() {
+        entityManager.close();
+//        entityManagerFactory.close();
+//        entityManagerFactory = Persistence.createEntityManagerFactory("default");
+        entityManager = entityManagerFactory.createEntityManager();
+    }
+
+    private EntityManager entityManager;
 
     public EntityManagerSingleton(){
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("default");
+        entityManagerFactory = Persistence.createEntityManagerFactory("default");
         entityManager = entityManagerFactory.createEntityManager();
     }
 

@@ -1,6 +1,8 @@
 package com.polsl.stylometry.controller;
 
-import com.polsl.stylometry.model.Analysis;
+import com.polsl.stylometry.entities.Text;
+import com.polsl.stylometry.model.EntityManagerSingleton;
+import jakarta.persistence.EntityManager;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.Cookie;
@@ -10,6 +12,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -51,11 +54,15 @@ public class DisplayAnalysisServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         response.setContentType("text/html");
 
-        Analysis analysis = Analysis.getInstance();
+        List<Text> texts = getTexts();
+
+
+
+//        Analysis analysis = Analysis.getInstance();
         //request.setAttribute("text", analysis.getText());
-        request.setAttribute("text", "UNKNOWN");
+//        request.setAttribute("text", texts.size());
 //        request.setAttribute("results", analysis.getResults());
-        request.setAttribute("results", new ArrayList<String>());
+        request.setAttribute("results", texts);
         request.getRequestDispatcher("/WEB-INF/displayAnalysis.jsp").forward(request,response);
         response.sendRedirect("/WEB-INF/displayAnalysis.jsp");
 //        PrintWriter out = response.getWriter();
@@ -70,5 +77,19 @@ public class DisplayAnalysisServlet extends HttpServlet {
 //        String header = "<h2>Here are your analysis results:</h2>";
 
         //out.println(layout.header+analysisHTML+layout.footer);
+    }
+
+    private List<Text> getTexts(){
+        if (EntityManagerSingleton.getInstance() == null) {
+            EntityManagerSingleton.setInstance(new EntityManagerSingleton());
+        }
+        EntityManagerSingleton factory = EntityManagerSingleton.getInstance();
+        //assert factory != null;
+        EntityManager entityManager = factory.getEntityManager();
+
+        List<Text> results = entityManager.createQuery("SELECT t FROM Text t")
+                .getResultList();
+//        factory.reset();
+        return results;
     }
 }

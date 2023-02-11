@@ -42,3 +42,9 @@ build/
 #glassfish
 glassfish-6.2.5/
 
+#misc
+MyDbTest/
+Stylometry/
+derby.log
+hs_err_pid8268.log
+replay_pid8268.log
