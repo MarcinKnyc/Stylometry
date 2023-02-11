@@ -25,7 +25,15 @@ public class WordFrequencyAnalysisResult implements Serializable {
 
 
 
+    public WordFrequencyAnalysisResult(){
 
+    }
+    public WordFrequencyAnalysisResult(Text _text){
+        dateCreatedTimestamp = 1673259100;
+        mostCommonWords = "Me, Myself and Alicja";
+        text = _text;
+        analyzeFrequency();
+    }
 
     public void analyzeFrequency() {
         PriorityQueue<String> pq = getListOfMostCommonWords(3);

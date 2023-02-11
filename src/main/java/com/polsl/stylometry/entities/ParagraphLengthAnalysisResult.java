@@ -15,6 +15,26 @@ import java.io.Serializable;
 @Entity
 public class ParagraphLengthAnalysisResult implements Serializable {
 
+    public float getAverageLength() {
+        return averageLength;
+    }
+
+    public void setAverageLength(float averageLength) {
+        this.averageLength = averageLength;
+    }
+
+    private float averageLength;
+    public ParagraphLengthAnalysisResult() {}
+    public ParagraphLengthAnalysisResult(Text _text) {
+        dateCreatedTimestamp = 1673259100;
+        text = _text;
+        analyzeSentenceLength();
+    }
+    public void analyzeSentenceLength() {
+        String[] lines = text.getContent().split("\\r?\\n|\\r");
+        int numberOfLines = lines.length;
+        averageLength = (float)text.getContent().length() / (float)numberOfLines;
+    }
 
 
 
@@ -34,7 +54,7 @@ public class ParagraphLengthAnalysisResult implements Serializable {
 
     @Override
     public String toString() {
-        return "entities.ParagraphLengthAnalysisResults[ id=" + id + " ]";
+        return "Average paragraph length: " + averageLength + " characters.";
     }
     //COMMON:
 

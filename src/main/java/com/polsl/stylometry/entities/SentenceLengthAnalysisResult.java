@@ -15,7 +15,26 @@ import java.io.Serializable;
 @Entity
 public class SentenceLengthAnalysisResult implements Serializable {
 
+    public float getAverageLength() {
+        return averageLength;
+    }
 
+    public void setAverageLength(float averageLength) {
+        this.averageLength = averageLength;
+    }
+
+    private float averageLength;
+    public SentenceLengthAnalysisResult() {}
+    public SentenceLengthAnalysisResult(Text _text) {
+        dateCreatedTimestamp = 1673259100;
+        text = _text;
+        analyzeSentenceLength();
+    }
+    public void analyzeSentenceLength() {
+        String[] sentences = text.getContent().split( "\\." );
+        int numberOfSentences = sentences.length;
+        averageLength = (float)text.getContent().length() / (float)numberOfSentences;
+    }
 
 
 
@@ -29,7 +48,7 @@ public class SentenceLengthAnalysisResult implements Serializable {
 
     @Override
     public String toString() {
-        return "entities.SentenceLengthAnalysisResults[ id=" + id + " ]";
+        return "Average sentence length: " + averageLength + " characters.";
     }
 
     //COMMON:

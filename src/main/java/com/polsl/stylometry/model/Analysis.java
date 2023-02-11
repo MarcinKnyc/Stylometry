@@ -46,18 +46,18 @@ public class Analysis {
 //            throw new InvalidTextInputException("The input text can't be empty, only digits, whitespace and special chars, it needs to include letters.");
 //        }
 //
-////        if (builder.wordFrequency){
-////            analyzeFrequency();
-////        }
-//        if (builder.vocabularyDiversity){
-//            analyzeVocabularyDiversity();
+//        if (builder.wordFrequency){
+//            analyzeFrequency();
 //        }
-//        if (builder.sentenceLength){
-//            analyzeSentenceLength();
-//        }
-//        if (builder.paragraphLength){
-//            analyzeParagraphLength();
-//        }
+        if (builder.vocabularyDiversity){
+            analyzeVocabularyDiversity();
+        }
+        if (builder.sentenceLength){
+            analyzeSentenceLength();
+        }
+        if (builder.paragraphLength){
+            analyzeParagraphLength();
+        }
     }
 
     public void analyzeParagraphLength() {

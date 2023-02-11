@@ -7,6 +7,10 @@ package com.polsl.stylometry.entities;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.concurrent.ConcurrentMap;
+import java.util.stream.Collectors;
+
+import static java.util.Arrays.asList;
 
 /**
  *
@@ -14,16 +18,52 @@ import java.io.Serializable;
  */
 @Entity
 public class VocabularyDiversityAnalysisResult implements Serializable {
+    public String grade;
+    public VocabularyDiversityAnalysisResult(){}
+    public VocabularyDiversityAnalysisResult(Text _text){
+        dateCreatedTimestamp = 1673259100;
+        text = _text;
+        calculateVocabularyDiversityGrade();
+    }
+    
+    private void calculateVocabularyDiversityGrade(){
+        ConcurrentMap<String, Integer> freqMap = getWordFrequencyMap();
+        int wordCountSum = 0;
+        for (ConcurrentMap.Entry<String, Integer> entry : freqMap.entrySet())
+        {
+            wordCountSum += entry.getValue();
+        }
+        float wordCountAverage = (float)wordCountSum / (float)freqMap.size();
 
-
-
-
-
+        if (wordCountAverage > 3) grade =  "Miserable";
+        else if (wordCountAverage > 2.5) grade =  "Very bad";
+        else if (wordCountAverage > 2) grade =  "Average";
+        else if (wordCountAverage > 1.75) grade =  "Good";
+        else grade =  "Amazing";
+    }
+    
+    private ConcurrentMap<String, Integer> getWordFrequencyMap() {
+        //source: https://www.javacodemonk.com/count-word-frequency-in-java-e6c2918a
+        ConcurrentMap<String, Integer> freqMap =
+                asList(text.getContent().split("[\\s.]"))
+                        .parallelStream()
+                        .filter(s -> !s.isEmpty())
+                        .collect(Collectors.toConcurrentMap(w -> w.toLowerCase(), w -> 1, Integer::sum));
+        //System.out.println(freqMap.toString());
+        return freqMap;
+    }
     @Override
     public String toString() {
-        return "";
+        return "Vocabulary diversity was graded as " + grade;
     }
 
+    public String getGrade() {
+        return grade;
+    }
+
+    public void setGrade(String grade) {
+        this.grade = grade;
+    }
     //COMMON:
 
 

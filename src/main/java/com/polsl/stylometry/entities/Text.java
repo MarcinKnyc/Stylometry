@@ -38,20 +38,21 @@ public class Text implements Serializable {
         entityManager.persist(this);
 
         if (builder.isWordFrequency()){
-            WordFrequencyAnalysisResult analysisResult = new WordFrequencyAnalysisResult();
-            analysisResult.setDateCreatedTimestamp(1673259100);
-            analysisResult.setText(this);
-            entityManager.persist(analysisResult);
+            WordFrequencyAnalysisResult analysisResult = new WordFrequencyAnalysisResult(this);
+            entityManager.persist((WordFrequencyAnalysisResult)analysisResult);
         }
-//        if (builder.vocabularyDiversity){
-//            analyzeVocabularyDiversity();
-//        }
-//        if (builder.sentenceLength){
-//            analyzeSentenceLength();
-//        }
-//        if (builder.paragraphLength){
-//            analyzeParagraphLength();
-//        }
+        if (builder.isVocabularyDiversity()){
+            VocabularyDiversityAnalysisResult analysisResult = new VocabularyDiversityAnalysisResult(this);
+            entityManager.persist((VocabularyDiversityAnalysisResult)analysisResult);
+        }
+        if (builder.isSentenceLength()){
+            SentenceLengthAnalysisResult analysisResult = new SentenceLengthAnalysisResult(this);
+            entityManager.persist((SentenceLengthAnalysisResult)analysisResult);
+        }
+        if (builder.isParagraphLength()){
+            ParagraphLengthAnalysisResult analysisResult = new ParagraphLengthAnalysisResult(this);
+            entityManager.persist((ParagraphLengthAnalysisResult)analysisResult);
+        }
     }
 
 
