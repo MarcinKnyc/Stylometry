@@ -79,18 +79,6 @@ public class DisplayAnalysisServlet extends HttpServlet {
         request.setAttribute("results", texts);
         request.getRequestDispatcher("/WEB-INF/displayAnalysis.jsp").forward(request,response);
         response.sendRedirect("/WEB-INF/displayAnalysis.jsp");
-//        PrintWriter out = response.getWriter();
-
-        //get Analysis HTML view
-//        Analysis analysis = Analysis.getInstance();
-//        ArrayList<String> cookieNames = getCookieNames(request);
-//        String analysisHTML = "";
-//        if (analysis != null)
-//            analysisHTML = displayAnalysis.formatAnalysisResults(analysis);
-//
-//        String header = "<h2>Here are your analysis results:</h2>";
-
-        //out.println(layout.header+analysisHTML+layout.footer);
     }
 
     private List<Text> getTexts(){

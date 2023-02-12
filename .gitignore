@@ -2,7 +2,6 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
-.mvn
 
 ### IntelliJ IDEA ###
 .idea/modules.xml
@@ -46,5 +45,5 @@ glassfish-6.2.5/
 MyDbTest/
 Stylometry/
 derby.log
-hs_err_pid8268.log
-replay_pid8268.log
+hs_err_pid*
+replay_pid*

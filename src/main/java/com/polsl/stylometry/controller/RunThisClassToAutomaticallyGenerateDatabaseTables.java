@@ -9,7 +9,7 @@ public class RunThisClassToAutomaticallyGenerateDatabaseTables {
     public static void main(String[] args){
         //prototype code
         Text text = new Text();
-        text.setContent("This is an example sentence. In an example paragraph. Funny word: Fifnaffaffen.");
+        text.setContent("This is an example sentence. In an example paragraph. Funny word: Sesquipedalian.");
 
         ParagraphLengthAnalysisResult paragraphLengthAnalysisResult = new ParagraphLengthAnalysisResult();
         paragraphLengthAnalysisResult.setDateCreatedTimestamp(1673259100);
@@ -26,15 +26,10 @@ public class RunThisClassToAutomaticallyGenerateDatabaseTables {
         WordFrequencyAnalysisResult wordFrequencyAnalysisResult = new WordFrequencyAnalysisResult();
         wordFrequencyAnalysisResult.setDateCreatedTimestamp(1673259100);
         wordFrequencyAnalysisResult.setText(text);
-//        PersonMapped person = new PersonMapped();
-//        person.setAge(12);
-//        person.setFirstName("Frankie");
-//        person.setLastName("Frank");
 
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("default");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
-//        entityManager.persist(person);
         entityManager.persist(text);
         entityManager.persist(paragraphLengthAnalysisResult);
         entityManager.persist(wordFrequencyAnalysisResult);
@@ -43,6 +38,5 @@ public class RunThisClassToAutomaticallyGenerateDatabaseTables {
         entityManager.getTransaction().commit();
         entityManager.close();
         entityManagerFactory.close();
-//        String text = request.getParameter("text");
     }
 }

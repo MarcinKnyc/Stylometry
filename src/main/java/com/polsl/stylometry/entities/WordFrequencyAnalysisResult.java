@@ -16,15 +16,11 @@ import static java.util.Arrays.asList;
 
 /**
  *
- * @author Student
+ * @author Marcin Knyć
+ * @version 0.2
  */
 @Entity
 public class WordFrequencyAnalysisResult implements Serializable {
-
-
-
-
-
     public WordFrequencyAnalysisResult(){
 
     }

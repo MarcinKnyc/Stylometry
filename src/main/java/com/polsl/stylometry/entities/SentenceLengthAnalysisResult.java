@@ -10,7 +10,8 @@ import java.io.Serializable;
 
 /**
  *
- * @author Student
+ * @author Marcin Knyć
+ * @version 0.2
  */
 @Entity
 public class SentenceLengthAnalysisResult implements Serializable {

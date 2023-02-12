@@ -18,7 +18,7 @@ import static java.util.Arrays.asList;
  * @version 0.77
  * All analysis results are stored in a field and returned with GetResults() in the end.
  * is now a singleton for uses of f4
- * Not used anymore, logic moved to entities so they won't be anemic.
+ * Not used anymore, logic moved to entities, so they won't be anemic.
  */
 public class Analysis {
     //custom singleton logic:
@@ -42,14 +42,14 @@ public class Analysis {
     public Analysis(AnalysisBuilder builder) throws InvalidTextInputException {
         text = builder.getText();
 
-//        //custom exception
-//        if (!containsLetters(text)){
-//            throw new InvalidTextInputException("The input text can't be empty, only digits, whitespace and special chars, it needs to include letters.");
-//        }
-//
-//        if (builder.wordFrequency){
-//            analyzeFrequency();
-//        }
+        //custom exception
+        if (!containsLetters(text)){
+            throw new InvalidTextInputException("The input text can't be empty, only digits, whitespace and special chars, it needs to include letters.");
+        }
+
+        if (builder.wordFrequency){
+            analyzeFrequency();
+        }
         if (builder.vocabularyDiversity){
             analyzeVocabularyDiversity();
         }
@@ -59,6 +59,41 @@ public class Analysis {
         if (builder.paragraphLength){
             analyzeParagraphLength();
         }
+    }
+
+    private boolean containsLetters(String string) {
+        //source: https://dirask.com/posts/Java-check-if-string-contains-any-letters-pVmeRD
+        if (string == null || string.isEmpty()) {
+            return false;
+        }
+        for (int i = 0; i < string.length(); ++i) {
+            if (Character.isLetter(string.charAt(i))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void analyzeFrequency() {
+        PriorityQueue<String> pq = getListOfMostCommonWords(3);
+        String word1 = pq.poll();
+        String word2 = pq.poll();
+        String word3 = pq.poll();
+        results.add("Most common words: " + word1 + ", " + word2 + ", " + word3);
+    }
+
+    private PriorityQueue<String> getListOfMostCommonWords(int size) {
+        ConcurrentMap<String, Integer> freqMap = getWordFrequencyMap();
+
+        //Priority queue that uses frequency as the comparator and size as 3
+        PriorityQueue<String> pq = new PriorityQueue<>(Comparator.comparingInt(freqMap::get));
+        for(String key: freqMap.keySet()) {
+            pq.add(key);
+            if(pq.size() > size) {
+                pq.poll();
+            }
+        }
+        return pq;
     }
 
     public void analyzeParagraphLength() {

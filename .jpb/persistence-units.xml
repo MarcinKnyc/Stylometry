@@ -6,10 +6,6 @@
         <packages>
           <package value="com.polsl.stylometry.entities" />
         </packages>
-        <entities>
-          <entity value="com.polsl.stylometry.entities.Person" />
-          <entity value="com.polsl.stylometry.entities.PersonMapped" />
-        </entities>
       </persistence-unit>
     </persistence-units>
   </component>

@@ -14,9 +14,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * in order to avoid anemic domain entities, database logic is included in this class.
+ * In order to avoid anemic domain entities, database logic is included in this class.
+ * Allows for one analysis result in every category for now.
+ * Database already allows for multiple.
  *
- * @author Student
+ * @author Marcin Knyć
+ * @version 0.2
  */
 @Entity
 public class Text implements Serializable {

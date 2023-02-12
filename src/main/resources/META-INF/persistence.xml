@@ -7,8 +7,6 @@
 
         <class>com.polsl.stylometry.entities.WordFrequencyAnalysisResult</class>
         <class>com.polsl.stylometry.entities.Text</class>
-        <class>com.polsl.stylometry.entities.Person</class>
-        <class>com.polsl.stylometry.entities.PersonMapped</class>
         <class>com.polsl.stylometry.entities.ParagraphLengthAnalysisResult</class>
         <class>com.polsl.stylometry.entities.SentenceLengthAnalysisResult</class>
         <class>com.polsl.stylometry.entities.VocabularyDiversityAnalysisResult</class>

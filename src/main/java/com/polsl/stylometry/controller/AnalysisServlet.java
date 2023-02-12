@@ -12,7 +12,7 @@ import jakarta.servlet.annotation.*;
 /**
  *
  * @author Marcin Knyć
- * @version 0.1
+ * @version 0.2
  * Form to submit text for analysis
  * Different functions for POST and GET since making them the same didn't make sense to me.
  */

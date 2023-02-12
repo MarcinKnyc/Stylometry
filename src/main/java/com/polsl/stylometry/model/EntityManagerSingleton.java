@@ -8,7 +8,7 @@ import jakarta.persistence.Persistence;
  * Centralizes database connection logic.
  *
  * @author Marcin Knyć
- * @version 0.2
+ * @version 0.1
  */
 public class EntityManagerSingleton {
     //custom singleton logic:
@@ -30,8 +30,6 @@ public class EntityManagerSingleton {
 
     public void reset() {
         entityManager.close();
-//        entityManagerFactory.close();
-//        entityManagerFactory = Persistence.createEntityManagerFactory("default");
         entityManager = entityManagerFactory.createEntityManager();
     }
 
