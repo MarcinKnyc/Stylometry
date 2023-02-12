@@ -58,24 +58,6 @@ public class DisplayAnalysisServlet extends HttpServlet {
 
         List<Text> texts = getTexts();
 
-        //todo:delete
-        AnalysisBuilder builder = new AnalysisBuilder("This is an example sentence. In an example paragraph. Funny word: sesquipedalian.");
-        builder
-                .analyzeParagraphLength()
-                .analyzeWordFrequency()
-                .analyzeSentenceLength()
-                .analyzeVocabularyDiversity();
-        Text text = new Text();
-        text.setContent(builder.getText());
-        try {
-            text.analyzeAndSave(builder);
-        } catch (InvalidTextInputException e) {
-            throw new RuntimeException(e);
-        }
-        texts = new ArrayList<Text>();
-        texts.add(text);
-        //todo:end-delete
-
         request.setAttribute("results", texts);
         request.getRequestDispatcher("/WEB-INF/displayAnalysis.jsp").forward(request,response);
         response.sendRedirect("/WEB-INF/displayAnalysis.jsp");
@@ -91,7 +73,6 @@ public class DisplayAnalysisServlet extends HttpServlet {
 
         List<Text> results = entityManager.createQuery("SELECT t FROM Text t")
                 .getResultList();
-//        factory.reset();
         return results;
     }
 }
