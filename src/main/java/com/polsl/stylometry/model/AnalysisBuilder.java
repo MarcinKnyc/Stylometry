@@ -7,7 +7,7 @@ package com.polsl.stylometry.model;
 /**
  *
  * @author Marcin Knyć
- * @version 0.1
+ * @version 0.2
  */
 public class AnalysisBuilder {
     boolean wordFrequency = false, vocabularyDiversity = false, 
@@ -17,19 +17,19 @@ public class AnalysisBuilder {
     public AnalysisBuilder(String _text){
         text = _text;
     }
-    public AnalysisBuilder AnalyzeWordFrequency(){
+    public AnalysisBuilder analyzeWordFrequency(){
         wordFrequency = true;
         return this;
     }
-    public AnalysisBuilder AnalyzeVocabularyDiversity(){
+    public AnalysisBuilder analyzeVocabularyDiversity(){
         vocabularyDiversity = true;
         return this;
     }
-    public AnalysisBuilder AnalyzeSentenceLength(){
+    public AnalysisBuilder analyzeSentenceLength(){
         sentenceLength = true;
         return this;
     }
-    public AnalysisBuilder AnalyzeParagraphLength(){
+    public AnalysisBuilder analyzeParagraphLength(){
         paragraphLength = true;
         return this;
     }

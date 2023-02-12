@@ -10,6 +10,7 @@ import com.polsl.stylometry.model.InvalidTextInputException;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,7 +20,7 @@ import java.util.List;
  */
 @Entity
 public class Text implements Serializable {
-    public void analyze(AnalysisBuilder builder) throws InvalidTextInputException {
+    public void analyzeAndSave(AnalysisBuilder builder) throws InvalidTextInputException {
         String text = this.getContent();
 
         //custom exception
@@ -39,18 +40,22 @@ public class Text implements Serializable {
 
         if (builder.isWordFrequency()){
             WordFrequencyAnalysisResult analysisResult = new WordFrequencyAnalysisResult(this);
+            wordFrequencyAnalysisResults.add(analysisResult); //todo:delete
             entityManager.persist((WordFrequencyAnalysisResult)analysisResult);
         }
         if (builder.isVocabularyDiversity()){
             VocabularyDiversityAnalysisResult analysisResult = new VocabularyDiversityAnalysisResult(this);
+            vocabularyDiversityAnalysisResults.add(analysisResult); //todo:delete
             entityManager.persist((VocabularyDiversityAnalysisResult)analysisResult);
         }
         if (builder.isSentenceLength()){
             SentenceLengthAnalysisResult analysisResult = new SentenceLengthAnalysisResult(this);
+            sentenceLengthAnalysisResults.add(analysisResult); //todo:delete
             entityManager.persist((SentenceLengthAnalysisResult)analysisResult);
         }
         if (builder.isParagraphLength()){
             ParagraphLengthAnalysisResult analysisResult = new ParagraphLengthAnalysisResult(this);
+            paragraphLengthAnalysisResults.add(analysisResult); //todo:delete
             entityManager.persist((ParagraphLengthAnalysisResult)analysisResult);
         }
     }
@@ -92,7 +97,7 @@ public class Text implements Serializable {
     }
     
     @OneToMany(mappedBy = "text")
-    private List<ParagraphLengthAnalysisResult> paragraphLengthAnalysisResults;
+    private List<ParagraphLengthAnalysisResult> paragraphLengthAnalysisResults = new ArrayList<ParagraphLengthAnalysisResult>();
 
     public List<ParagraphLengthAnalysisResult> getParagraphLengthAnalysisResults() {
         return paragraphLengthAnalysisResults;
@@ -103,7 +108,7 @@ public class Text implements Serializable {
     }
     
     @OneToMany(mappedBy = "text")
-    private List<SentenceLengthAnalysisResult> sentenceLengthAnalysisResults;
+    private List<SentenceLengthAnalysisResult> sentenceLengthAnalysisResults = new ArrayList<SentenceLengthAnalysisResult>();
 
     public List<SentenceLengthAnalysisResult> getSentenceLengthAnalysisResults() {
         return sentenceLengthAnalysisResults;
@@ -114,7 +119,7 @@ public class Text implements Serializable {
     }
     
     @OneToMany(mappedBy = "text")
-    private List<VocabularyDiversityAnalysisResult> vocabularyDiversityAnalysisResults;
+    private List<VocabularyDiversityAnalysisResult> vocabularyDiversityAnalysisResults = new ArrayList<VocabularyDiversityAnalysisResult>();
 
     public List<VocabularyDiversityAnalysisResult> getVocabularyDiversityAnalysisResults() {
         return vocabularyDiversityAnalysisResults;
@@ -125,7 +130,7 @@ public class Text implements Serializable {
     }
     
     @OneToMany(mappedBy = "text")
-    private List<WordFrequencyAnalysisResult> wordFrequencyAnalysisResults;
+    private List<WordFrequencyAnalysisResult> wordFrequencyAnalysisResults = new ArrayList<WordFrequencyAnalysisResult>();
 
     public List<WordFrequencyAnalysisResult> getWordFrequencyAnalysisResults() {
         return wordFrequencyAnalysisResults;

@@ -58,20 +58,17 @@ public class AnalysisServlet extends HttpServlet {
         AnalysisBuilder builder = new AnalysisBuilder(_text);
 
         if (shouldAnalyzeWordFrequency)
-            builder.AnalyzeWordFrequency();
+            builder.analyzeWordFrequency();
         if (shouldAnalyzeVocabularyDiversity)
-            builder.AnalyzeVocabularyDiversity();
+            builder.analyzeVocabularyDiversity();
         if (shouldAnalyzeSentenceLength)
-            builder.AnalyzeSentenceLength();
+            builder.analyzeSentenceLength();
         if (shouldAnalyzeParagraphLength)
-            builder.AnalyzeParagraphLength();
+            builder.analyzeParagraphLength();
 
-        //create model
-//        Analysis analysis = builder.Build();
-//        Analysis.setInstance(analysis);
         Text text = new Text();
         text.setContent(_text);
-        text.analyze(builder);
+        text.analyzeAndSave(builder);
     }
 
     public void destroy() {

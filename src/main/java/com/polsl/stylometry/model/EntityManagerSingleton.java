@@ -8,6 +8,7 @@ import jakarta.persistence.Persistence;
  * Centralizes database connection logic.
  *
  * @author Marcin Knyć
+ * @version 0.2
  */
 public class EntityManagerSingleton {
     //custom singleton logic:

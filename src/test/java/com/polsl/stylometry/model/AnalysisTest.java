@@ -25,7 +25,7 @@ public class AnalysisTest {
     
     @Test
     public void testWordFrequencyAnalysis() {
-        builder.AnalyzeWordFrequency();
+        builder.analyzeWordFrequency();
         try {
             Analysis analysis = builder.Build();
             assertThat(analysis.getResults(), hasItem("Most common words: real, not, a"));
@@ -35,7 +35,7 @@ public class AnalysisTest {
     }
     @Test
     public void testVocabularyDiversityAnalysis() {
-        builder.AnalyzeVocabularyDiversity();
+        builder.analyzeVocabularyDiversity();
         try {
             Analysis analysis = builder.Build();
             assertThat(analysis.getResults(), hasItem("Vocabulary diversity was graded as Amazing"));
@@ -45,7 +45,7 @@ public class AnalysisTest {
     }
     @Test
     public void testSentenceLengthAnalysis() {
-        builder.AnalyzeSentenceLength();
+        builder.analyzeSentenceLength();
         try {
             Analysis analysis = builder.Build();
             assertThat(analysis.getResults(), hasItem("Average sentence length: 31.0 characters."));
@@ -55,7 +55,7 @@ public class AnalysisTest {
     }
     @Test
     public void testParagraphLengthAnalysis() {
-        builder.AnalyzeParagraphLength();
+        builder.analyzeParagraphLength();
         try {
             Analysis analysis = builder.Build();
             assertThat(analysis.getResults(), hasItem("Average paragraph length: 31.0 characters."));

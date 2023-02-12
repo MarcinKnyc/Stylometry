@@ -13,11 +13,6 @@
         <p><b>Stylometry</b> - A Simple Web App for Stylometric text analysis</p>
     </div>
     <div id="content">
-        <p>
-            <%
-                out.println(request.getAttribute("text"));
-            %>
-        </p>
         <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         <c:forEach items="${results}" var="result" varStatus="loop">
             <h3>text:</h3>
@@ -25,6 +20,15 @@
                 ${result.getContent()}
             </p>
             <h3>analysis results:</h3>
+            <ul>
+                <li>${result.getParagraphLengthAnalysisResults()[0].toString()}</li>
+            </ul>
+            <ul>
+                <li>${result.getSentenceLengthAnalysisResults()[0].toString()}</li>
+            </ul>
+            <ul>
+                <li>${result.getVocabularyDiversityAnalysisResults()[0].toString()}</li>
+            </ul>
             <ul>
                 <li>${result.getWordFrequencyAnalysisResults()[0].toString()}</li>
             </ul>

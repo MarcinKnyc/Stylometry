@@ -15,9 +15,10 @@ import static java.util.Arrays.asList;
 /**
  *
  * @author Marcin Knyć
- * @version 0.5
+ * @version 0.77
  * All analysis results are stored in a field and returned with GetResults() in the end.
  * is now a singleton for uses of f4
+ * Not used anymore, logic moved to entities so they won't be anemic.
  */
 public class Analysis {
     //custom singleton logic:

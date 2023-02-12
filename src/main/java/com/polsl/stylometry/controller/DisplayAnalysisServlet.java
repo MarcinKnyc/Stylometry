@@ -1,7 +1,9 @@
 package com.polsl.stylometry.controller;
 
 import com.polsl.stylometry.entities.Text;
+import com.polsl.stylometry.model.AnalysisBuilder;
 import com.polsl.stylometry.model.EntityManagerSingleton;
+import com.polsl.stylometry.model.InvalidTextInputException;
 import jakarta.persistence.EntityManager;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -56,12 +58,24 @@ public class DisplayAnalysisServlet extends HttpServlet {
 
         List<Text> texts = getTexts();
 
+        //todo:delete
+        AnalysisBuilder builder = new AnalysisBuilder("This is an example sentence. In an example paragraph. Funny word: sesquipedalian.");
+        builder
+                .analyzeParagraphLength()
+                .analyzeWordFrequency()
+                .analyzeSentenceLength()
+                .analyzeVocabularyDiversity();
+        Text text = new Text();
+        text.setContent(builder.getText());
+        try {
+            text.analyzeAndSave(builder);
+        } catch (InvalidTextInputException e) {
+            throw new RuntimeException(e);
+        }
+        texts = new ArrayList<Text>();
+        texts.add(text);
+        //todo:end-delete
 
-
-//        Analysis analysis = Analysis.getInstance();
-        //request.setAttribute("text", analysis.getText());
-//        request.setAttribute("text", texts.size());
-//        request.setAttribute("results", analysis.getResults());
         request.setAttribute("results", texts);
         request.getRequestDispatcher("/WEB-INF/displayAnalysis.jsp").forward(request,response);
         response.sendRedirect("/WEB-INF/displayAnalysis.jsp");
